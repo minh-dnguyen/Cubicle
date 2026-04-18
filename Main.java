@@ -1,9 +1,9 @@
-
+import java.util.*;
 
 public class Main{
     public static void main(String[] args){
     PropertySystem system = new PropertySystem();
-    FileHandler filier = new FileHandler();
+    Scanner input = new Scanner(System.in);
 
         system.addMockProperty(new House(
     "1990 Blue Lake Blvd Arlington TX, 76040",
@@ -60,6 +60,15 @@ public class Main{
     system.addProperty();
     system.displayAllPlaces();
     system.displayAllPlacesShorthand();
+    String fileName;
+    boolean append;
+    String appendChoice;
+    System.out.print("Enter a file you wish to write the information into: (don't include .txt): ");
+    fileName = input.nextLine().concat(".txt");
+    System.out.print("Do you wish to overwrite the file? (Y/N): ");
+    appendChoice = input.nextLine();
+    append = appendChoice.equalsIgnoreCase("y");
+    FileHandler.writeToFile(system.getPlaces(), fileName, append);
     system.removeProperty();
     system.displayAllPlaces();
     }

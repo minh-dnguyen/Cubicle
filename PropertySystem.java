@@ -1,11 +1,15 @@
 import java.util.*;
 
 public class PropertySystem{
-    private List<Property> places;
+    private ArrayList<Property> places;
     Scanner input = new Scanner(System.in);
 
     public PropertySystem(){
         places = new ArrayList<>();
+    }
+
+    public ArrayList<Property> getPlaces(){
+        return places;
     }
 
     public void addProperty(){
@@ -76,7 +80,7 @@ public class PropertySystem{
                 places.add(new House(propertyAddress, propertyMinCapcity, propertyMaxCapacity, bedrooms, bathrooms, propertyYearlyCost, propertyFeatures, propertyTax, floors, garages, propertyStatus));
             }
             else{
-                places.add(new Other(propertyAddress, propertyMinCapcity, propertyMaxCapacity, bedrooms, bathrooms, propertyYearlyCost, propertyFeatures, propertyType, propertyStatus));
+                places.add(new Other(propertyAddress, propertyMinCapcity, propertyMaxCapacity, bedrooms, bathrooms, propertyYearlyCost, propertyFeatures, propertyType.toUpperCase(), propertyStatus));
             }
         }
     }

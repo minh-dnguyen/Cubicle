@@ -50,6 +50,11 @@ public class House extends Property {
         System.out.println("      |         |          ");
         System.out.println("      |_________|          \n");
     }
+    
+    @Override
+    public String getInformation() {
+        return "HOUSE|" + propertyTax + "|" + floors + "|" + garages + "|" + super.getInformation();
+    }
 
     @Override
     public void displayProperty(){

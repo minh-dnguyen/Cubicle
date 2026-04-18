@@ -102,6 +102,12 @@ public abstract class Property {
         System.out.printf("$%.2f | %s\n",yearlyCost,address);
     }
 
+    public String getInformation() {
+    return address + "|" + currentStatus.name() + "|" + yearlyCost + "|" + 
+           minPeopleCapacity + "|" + maxPeopleCapacity + "|" + bedrooms + "|" + 
+           bathrooms + "|" + otherFeatures;
+    }
+
 
     public abstract void displayPicture();
 }

@@ -1,19 +1,19 @@
 public class Other extends Property {
-    private String orignalType;
+    private String originalType;
 
-    public Other(String address, int minPeople, int maxPeople, int bedrooms, int bathrooms, double yearlyCost, String otherFeatures, String originalTypeString, Status currStatus){
+    public Other(String address, int minPeople, int maxPeople, int bedrooms, int bathrooms, double yearlyCost, String otherFeatures, String propertyType, Status currStatus){
         //calls super's constructor
         super(address, minPeople, maxPeople, bedrooms, bathrooms, yearlyCost, otherFeatures, currStatus);
-        this.orignalType = originalTypeString;
+        this.originalType = propertyType;
     }
 
     //seters and getters
     public String getOriginalType(){
-        return orignalType;
+        return originalType;
     }
 
     public void setOriginalType(String originalType){
-        this.orignalType = originalType;
+        this.originalType = originalType;
     }
 
     public void displayPicture(){
@@ -27,9 +27,14 @@ public class Other extends Property {
     }
 
     @Override
+    public String getInformation(){
+        return originalType + "|" + super.getInformation();
+    }
+
+    @Override
     //displays the information for an Other property
     public void displayProperty(){
-        System.out.printf("%s\n", orignalType);
+        System.out.printf("%s\n", originalType);
         super.displayProperty();
         System.out.println("Other Information: " + getOtherFeatures());
     }

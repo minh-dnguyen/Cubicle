@@ -1,3 +1,5 @@
+import javax.annotation.processing.SupportedSourceVersion;
+
 public class Apartment extends Property{
     private String landLordName;
     private double monthlyRentAmount;
@@ -42,6 +44,11 @@ public class Apartment extends Property{
         System.out.println("Monthly Rent: " + monthlyRentAmount);
         System.out.printf("Landord: %s\n", landLordName);
         System.out.println("Other Information: " + getOtherFeatures());
+    }
+
+    @Override
+    public String getInformation() {
+        return "APARTMENT|" + floorNumber + "|" + landLordName + "|" + monthlyRentAmount + "|" + super.getInformation();
     }
 
     //visual image for apartments

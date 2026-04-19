@@ -99,7 +99,7 @@ public abstract class Property {
 
     //shorthand display to not clog terminal if needed
     public void displayPropertyShorthand(){
-        System.out.printf("$%.2f | %s\n",yearlyCost,address);
+        System.out.printf("$%.2f | %s | %s\n",yearlyCost,currentStatus.name(), address);
     }
 
     public String getInformation() {

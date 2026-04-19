@@ -2,90 +2,82 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args){
+        //initialize the needed variables
         PropertySystem system = new PropertySystem();
         Scanner input = new Scanner(System.in);
+        String fileName;
+        int choice = 0;
 
+        System.out.println("---WELCOME TO CUBICLE---");
+
+        //allow user to read from file at start or go manual
         System.out.print("Load properties from a saved file? (Y/N): ");
         if (input.nextLine().trim().equalsIgnoreCase("y")) {
             System.out.print("Enter the file name to load (don't include .txt): ");
-            String loadFile = input.nextLine().trim().concat(".txt");
-            for (Property p : FileHandler.readFile(loadFile)) {
+            fileName = input.nextLine().trim().concat(".txt");
+            for (Property p : Filier.readFile(fileName)) {
                 system.addMockProperty(p);
             }
-            System.out.println("Properties loaded from " + loadFile + "\n");
+            if(!system.getPlaces().isEmpty()){
+                System.out.println("Properties loaded from " + fileName);
+            }
         }
 
-        system.addMockProperty(new House(
-    "1990 Blue Lake Blvd Arlington TX, 76040",
-    2,
-    6,
-    4,
-    3,
-    500000.0,
-    "Pool, Solar Panels",
-    1.2,
-    2,
-    2, Status.CONSIDERING
-        ));
+        //menu system
+        while(choice != 7){
+            displayMenu();
+            System.out.print("Enter your choice: ");
+            choice = input.nextInt();
+            input.nextLine();
 
-        system.addMockProperty(new Apartment(
-        "1241 Super Lake Ave",
-        1,
-        4,
-        2,
-        2,
-        20000.0,
-        "Gym, Parking, Pet Friendly",
-        "Johnson Realty",
-        1500.0,
-        3, Status.NEW
-        ));
-
-        system.addMockProperty(new House(
-            "88 Cedar Ridge Dr",
-            3,
-            8,
-            5,
-            4,
-            750000.0,
-            "Basement, Fireplace",
-            1.5,
-            3,
-            3, Status.WITHDRAWN
-        ));
-
-        /*system.addMockProperty(new Apartment(
-            "550 Downtown Heights",
-            1,
-            3,
-            1,
-            1,
-            18000.0,
-            "Rooftop access, Gym",
-            "Skyline Properties",
-            1200.0,
-            12, Status.CONSIDERING
-        )); */
-
-        
-
-        system.addProperty();
-        system.displayAllPlaces();
-        system.displayAllPlacesShorthand();
-        String fileName;
-        boolean append;
-        String appendChoice;
-        System.out.print("Enter a file you wish to write the information into: (don't include .txt): ");
-        fileName = input.nextLine().concat(".txt");
-        System.out.print("Do you wish to overwrite the file? (Y/N): ");
-        appendChoice = input.nextLine();
-        append = !appendChoice.equalsIgnoreCase("y");
-        FileHandler.writeToFile(system.getPlaces(), fileName, append);
-
-        System.out.print("Would you like to filter the properties? (Yes or No): ");
-        String filterChoice = input.nextLine();
-        if(filterChoice.equalsIgnoreCase("Yes")) {
-            Filter.filterProperties(system.getPlaces(), input);
+            switch(choice){
+                case 1:
+                    //display all saved properties
+                    system.displayAllPlaces();
+                    break;
+                case 2:
+                    //display all saved properties with a shorter notation
+                    system.displayAllPlacesShorthand();
+                    break;
+                case 3:
+                    system.addProperty();
+                    //add a property to the list
+                    break;
+                case 4:
+                    system.displayAllPlacesShorthand();
+                    system.removeProperty();
+                    //delete a saved property
+                    break;
+                case 5:
+                    Filter.filterProperties(system.getPlaces(),input);
+                    //filter properties based on criteria
+                    break;
+                case 6: 
+                    Filier.writeToFile(system.getPlaces(), input);
+                    //write saved properties to a file
+                    break;
+                case 7:
+                    //exit the program
+                    System.out.println("Thank you for using Cubicle!");
+                    break;
+                default:
+                    System.out.println("Please enter a valid choice ranging from 1-6");
+                    break;
+            }
         }
+
+    }
+
+    //MENU
+    public static void displayMenu(){
+        System.out.println("\n---CUBICLE MENU---");
+        System.out.println("1. Display All saved Properties");
+        System.out.println("2. Display All saved Properties Shorthand");
+        System.out.println("3. Add a property to the list");
+        System.out.println("4. Delete a saved property");
+        System.out.println("5. Filter Properties based on criteria");
+        System.out.println("6. Write saved properties to a file");
+        System.out.println("7. Exit the Program (Make sure to save your information!)");
+        System.out.println("------------------");
     }
 }

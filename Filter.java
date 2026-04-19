@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.*;
 
 public class Filter {
@@ -12,6 +11,7 @@ public class Filter {
             String userInput;
 
             while(choosingFilters == true) {
+                System.out.println("---FILTERING SYSTEM---");
                 System.out.println("\nSelect what you'd like to sort by:");
                 System.out.println("Status: 1");
                 System.out.println("Minimum and Maximum Capacity: 2");
@@ -24,7 +24,6 @@ public class Filter {
                 System.out.print("Enter your Choice: ");
                 sortingChoice = input.nextInt();
                 input.nextLine();
-
 
                 switch(sortingChoice) {                 //need to check for if they put something wacky here
                 case 1:
@@ -87,11 +86,29 @@ public class Filter {
                 }
             }
 
+
             ArrayList<Property> validProperties  = getFilteredProperties(list, minBedrooms, maxBedrooms, minBathrooms, maxBathrooms, minCapacity, maxCapacity, minFloors, maxFloors, minYearCost, maxYearCost, minTax, maxTax, inStatus);
 
-            for(int i = 0; i < validProperties.size(); i++) {
+            if(validProperties.isEmpty()){
+                System.out.println("There were no properties that matched your criteria :(");
+            }
+            //display the filtered properties
+            else{   
+                System.out.println("---FILTERED PROPERTIES---");
+                for(int i = 0; i < validProperties.size(); i++) {
+                System.out.println("---------------------------");
+                System.out.println("Filtered Property " + (i+1));
                 validProperties.get(i).displayProperty();
-                System.out.println("");
+                System.out.println("---------------------------");
+                input.nextLine();
+                }
+                //ask user if they want to save the filtered properties to a file
+                String saveToFile;
+                System.out.print("Would you like to save the filtered properties to a file? (Y/N): ");
+                saveToFile = input.nextLine();
+                if(saveToFile.equalsIgnoreCase("y")){
+                    Filier.writeToFile(list, input);
+                }
             }
         }
         
@@ -134,6 +151,7 @@ public class Filter {
 			if(status != null && status != listOfProperties.get(i).getStatus()) {
 				continue;
 			}
+            //if the property fails all of the if statements it fits the criteria and is added
 			filteredProperties.add(listOfProperties.get(i));
 
 		}

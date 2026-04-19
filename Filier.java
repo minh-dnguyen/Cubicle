@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class FileHandler {
+public class Filier {
     public static ArrayList<Property> readFile(String fileName){
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             ArrayList<Property> readList = new ArrayList<>();
@@ -58,6 +58,7 @@ public class FileHandler {
                             yearlyCost, otherFeatures, originalType, status));
                 }
             }
+            
             return readList;
         } catch (Exception e) {
             System.out.println("There was an error accessing that file in your folder. We will default to manually adding");
@@ -65,17 +66,29 @@ public class FileHandler {
         }
     }
 
-    public static void writeToFile(ArrayList<Property> list, String fileName, boolean append){
+    public static void writeToFile(ArrayList<Property> list, Scanner input){
+        
         if(list.isEmpty()){
-            System.out.printf("There is no property to write to %s :(", fileName);
+            System.out.printf("There is no property to write to a file :(");
             return;
         }
+        
+        //ask user which file to write to and if they want it to overwrite their existing work
+        boolean append;
+        String appendChoice;
+        System.out.print("Enter a file you wish to write the information into: (don't include .txt): ");
+        String fileName = input.nextLine().concat(".txt");
+        System.out.print("Do you wish to overwrite the file? (Y/N): ");
+        appendChoice = input.nextLine();
+        append = !appendChoice.equalsIgnoreCase("y");
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,append))) {
             for(Property property : list){
                 //getInformation has the properties seperated by | for easier reading/parsing for readFileMethod
                 writer.write(property.getInformation());
                 writer.newLine();
             }
+            System.out.printf("Successfully written to %s\n", fileName);
         } catch (Exception e) {
             System.out.println("There was an error writting to the file please try again");
         }

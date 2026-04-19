@@ -58,6 +58,7 @@ public class House extends Property {
 
     @Override
     public void displayProperty(){
+        displayPicture();
         System.out.printf("%d FLOOR HOUSE\n", floors);
         super.displayProperty();
         System.out.printf("Property Tax: %.2f%%\n", propertyTax);

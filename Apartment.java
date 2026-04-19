@@ -1,4 +1,4 @@
-import javax.annotation.processing.SupportedSourceVersion;
+
 
 public class Apartment extends Property{
     private String landLordName;
@@ -39,6 +39,7 @@ public class Apartment extends Property{
 
     @Override
     public void displayProperty(){
+        displayPicture();
         System.out.printf("APARTMENT ON FLOOR %d\n", floorNumber);
         super.displayProperty();
         System.out.println("Monthly Rent: " + monthlyRentAmount);

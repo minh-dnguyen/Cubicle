@@ -34,6 +34,7 @@ public class Other extends Property {
     @Override
     //displays the information for an Other property
     public void displayProperty(){
+        displayPicture();
         System.out.printf("%s\n", originalType);
         super.displayProperty();
         System.out.println("Other Information: " + getOtherFeatures());

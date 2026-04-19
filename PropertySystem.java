@@ -132,7 +132,6 @@ public class PropertySystem{
         for(int i = 0; i < places.size(); i++){
             Property property = places.get(i);
             System.out.printf("PROPERTY #%d\n", i+1);
-            property.displayPicture();
             property.displayProperty();
             input.nextLine();
         }
